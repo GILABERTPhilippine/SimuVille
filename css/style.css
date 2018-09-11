@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+
+header {
+    background-color: rgb(202, 198, 198);
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#partie1,
+#partie4 {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+#partie2 {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#btnSimulation {
+    padding-bottom: 50%;
+    padding-top: 50%;
+    margin-bottom: 30px;
+}
+
+#para {
+    width: 50%;
+}
