@@ -125,4 +125,20 @@ class Partie
 
         return $this;
     }
+
+    public function getCSV()
+    {
+
+        $pdo = new Database;
+
+        $connect = $pdo->getPdo();
+
+        $req = "COPY (SELECT pop_initiale, tx_nat, tx_mort, annee_cata FROM ville INNER JOIN ville_partie_cata ON ville.id_ville = ville_partie_cata.id_ville WHERE id_partie = (SELECT max (id_partie) FROM partie)) TO '/Applications/MAMP/htdocs/SimuVille/dump.csv' DELIMITER ',' CSV HEADER";
+
+        $getCsv = $connect->prepare($req);
+
+        $getCsv->execute();
+
+
+    }
 }

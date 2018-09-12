@@ -4,10 +4,9 @@ body {
     font-family: 'Quicksand', sans-serif;
 }
 
-header {
-    background-color: rgb(202, 198, 198);
-    padding-top: 50px;
-    padding-bottom: 50px;
+#btnSimulation {
+    height: 100%;
+    font-size: 15px;
 }
 
 #partie1,
@@ -19,12 +18,6 @@ header {
 #partie2 {
     margin-left: 20px;
     margin-right: 20px;
-}
-
-#btnSimulation {
-    padding-bottom: 50%;
-    padding-top: 50%;
-    margin-bottom: 30px;
 }
 
 #para {

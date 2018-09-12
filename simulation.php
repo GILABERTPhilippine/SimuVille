@@ -1,3 +1,9 @@
+<?php
+
+require 'Classes/Autoloader.php';
+Classes\Autoloader::register();
+
+?>
 <!doctype html>
 <html lang="fr">
 
@@ -16,7 +22,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="jumbotron">
         <h1 class="text-center">Bienvenue sur SimuVille, le site de simulation de villes</h1>
     </header>
     <br>
@@ -25,11 +31,11 @@
     <div id="partie1">
         <div class="form-group">
             <label for="nbrVille">Déterminer le nombre de villes :</label>
-            <input type="number" name="quantity" class="form-control" id="nbrVille" min="1" max="3">
+            <input type="number" name="quantity" class="form-control" id="nbrVille" value="1" min="1" max="3">
         </div>
         <div class="form-group">
             <label for="nbrAnneeSimu">Déterminer le nombre d'années de la simulation : </label>
-            <input type="number" name="quantity" class="form-control" id="nbrAnneeSimu" min="1" max="20000">
+            <input type="number" name="quantity" class="form-control" id="nbrAnneeSimu" value="500" min="1" max="20000">
         </div>
         <br>
         <button type="button" id="btnparametre" class="btn btn-secondary">Paramétrer les villes</button>
@@ -38,52 +44,58 @@
     <!-- PARTIE 2 -->
     <div id="partie2">
         <div class="row">
-            <div class="col">
+            <div class="col-10">
+                <div class="row">
+                <div class="col-4" id="ville1">
                 <h3>Ville 1</h3>
                 <div class="form-group">
                     <label for="popInitial">Population initiale</label>
-                    <input type="number" name="quantity" class="form-control" id="popInitial" min="2" max="5000">
+                    <input type="number" name="quantity" class="form-control" id="popInitial" value="2"  min="2" max="5000">
                 </div>
                 <div class="form-group">
                     <label for="txNatalite">Taux de natalité </label>
-                    <input type="number" name="quantity" class="form-control" id="txNatalite" step="0.001" min="0" max="1">
+                    <input type="number" name="quantity" class="form-control" id="txNatalite" value="0.024" step="0.001" min="0" max="1">
                 </div>
                 <div class="form-group">
                     <label for="txMortalite">Taux de mortalité</label>
-                    <input type="number" name="quantity" class="form-control" id="txMortalite" step="0.001" min="0" max="1">
+                    <input type="number" name="quantity" class="form-control" id="txMortalite" value="0.005" step="0.001" min="0" max="1">
                 </div>
             </div>
-            <div class="col">
+            <div class="col-4" id="ville2">
                 <h3>Ville 2</h3>
                 <div class="form-group">
                     <label for="popInitial">Population initiale</label>
-                    <input type="number" name="quantity" class="form-control" id="popInitial" min="2" max="5000">
+                    <input type="number" name="quantity" class="form-control" id="popInitial" value="2" min="2" max="5000">
                 </div>
                 <div class="form-group">
                     <label for="txNatalite">Taux de natalité </label>
-                    <input type="number" name="quantity" class="form-control" id="txNatalite" step="0.001" min="0" max="1">
+                    <input type="number" name="quantity" class="form-control" id="txNatalite" value="0.024" step="0.001" min="0" max="1">
                 </div>
                 <div class="form-group">
                     <label for="txMortalite">Taux de mortalité</label>
-                    <input type="number" name="quantity" class="form-control" id="txMortalite" step="0.001" min="0" max="1">
+                    <input type="number" name="quantity" class="form-control" id="txMortalite" value="0.005"
+                    step="0.001" min="0" max="1">
                 </div>
             </div>
-            <div class="col">
+            <div class="col-4" id="ville3">
                 <h3>Ville 3</h3>
                 <div class="form-group">
                     <label for="popInitial">Population initiale</label>
-                    <input type="number" name="quantity" class="form-control" id="popInitial" min="2" max="5000">
+                    <input type="number" name="quantity" class="form-control" id="popInitial" value="2" min="2" max="5000">
                 </div>
                 <div class="form-group">
                     <label for="txNatalite">Taux de natalité </label>
-                    <input type="number" name="quantity" class="form-control" id="txNatalite" step="0.001" min="0" max="1">
+                    <input type="number" name="quantity" class="form-control" id="txNatalite" value="0.024" step="0.001" min="0" max="1">
                 </div>
                 <div class="form-group">
                     <label for="txMortalite">Taux de mortalité</label>
-                    <input type="number" name="quantity" class="form-control" id="txMortalite" step="0.001" min="0" max="1">
+                    <input type="number" name="quantity" class="form-control" id="txMortalite" value="0.005"
+                    step="0.001" min="0" max="1">
                 </div>
             </div>
-            <div class="col">
+                </div>
+            </div>    
+            <div class="col-2">
                 <button type="button" id="btnSimulation" class="btn btn-danger btn-lg btn-block">Lancer la simulation</button>
             </div>
         </div>
@@ -91,16 +103,27 @@
 
     <!-- PARTIE 3 -->
     <div id="partie3">
-        <h3 class="chrono text-center">Année :</h3>
+        <h3 class="text-center">Année : <span id="chrono">0</span></h3>
+        <br>
         <div class="row">
-            <div class="col">
+            <div class="col" id="SimuVille1">
                 <h3>Ville 1</h3>
-                <h5>Population :<p></p>
+                <h5>Population : <span class="evolutionPop"></span>
                 </h5>
                 <div class="img"></div>
             </div>
-            <div class="col"></div>
-            <div class="col"></div>
+            <div class="col" id="SimuVille2">
+            <h3>Ville 2</h3>
+                <h5>Population :<span class="evolutionPop"></span>
+                </h5>
+                <div class="img"></div>
+            </div>
+            <div class="col" id="SimuVille3">
+            <h3>Ville 3</h3>
+                <h5>Population :<span class="evolutionPop"></span>
+                </h5>
+                <div class="img"></div>
+            </div>
         </div>
     </div>
 
@@ -130,12 +153,6 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <th scope="row">Population finale</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
                     <th scope="row">Taux de natalité</th>
                     <td></td>
                     <td></td>
@@ -147,22 +164,14 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <tr>
-                    <th scope="row">Catastrophe</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
             </tbody>
         </table>
         <div class="row">
-            <button type="button" class="btn btn-success">Recommencer</button>
+            <button type="button" class="btn btn-success" id="recommencer">Recommencer</button>
             &nbsp;
-            <button type="button" class="btn btn-info">Exporter en CSV</button>
+            <button type="button" class="btn btn-info" id="csv">Exporter en CSV</button>
         </div>
     </div>
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -176,3 +185,4 @@
 </body>
 
 </html>
+
