@@ -110,19 +110,19 @@ Classes\Autoloader::register();
                 <h3>Ville 1</h3>
                 <h5>Population : <span class="evolutionPop"></span>
                 </h5>
-                <div class="img"></div>
+                <img id="imgVille1" src="">
             </div>
             <div class="col" id="SimuVille2">
             <h3>Ville 2</h3>
                 <h5>Population :<span class="evolutionPop"></span>
                 </h5>
-                <div class="img"></div>
+                <img id="imgVille2" src="">
             </div>
             <div class="col" id="SimuVille3">
             <h3>Ville 3</h3>
                 <h5>Population :<span class="evolutionPop"></span>
                 </h5>
-                <div class="img"></div>
+                <img id="imgVille3" src="">
             </div>
         </div>
     </div>

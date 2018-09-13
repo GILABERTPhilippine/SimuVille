@@ -9,13 +9,19 @@ body {
     font-size: 15px;
 }
 
+img {
+    height: 32px;
+    width: 32px;
+}
+
 #partie1,
 #partie4 {
     margin-left: 100px;
     margin-right: 100px;
 }
 
-#partie2 {
+#partie2,
+#partie3 {
     margin-left: 20px;
     margin-right: 20px;
 }
