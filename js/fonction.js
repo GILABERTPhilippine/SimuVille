@@ -15,7 +15,6 @@ $("#btnSimulation").click(function () {
     var nbrVille = $("#nbrVille").val();
 
     chrono();
-    changeImg();
 
     $("#partie1, #partie2").hide();
 
@@ -27,34 +26,53 @@ $("#btnSimulation").click(function () {
 
 
 function chrono() {
+    var nbrVille = $("#nbrVille").val();
+    // console.log(nbrVille);
 
     var nbrAnneeSimu = parseInt($("#nbrAnneeSimu").val());
     var annee = parseInt($("#chrono").html());
-    var popInit = parseInt($("#popInitial").val());
-    var txNat = parseFloat($("#txNatalite").val());
-    var txMort = parseFloat($("#txMortalite").val());
 
-    $(".evolutionPop").html(popInit);
+    for (var n = 1; n <= nbrVille; n++) {
+        var popInit = parseInt($("#popInitial" + n).val());
+        var txNat = parseFloat($("#txNatalite" + n).val());
+        var txMort = parseFloat($("#txMortalite" + n).val());
+        $("#evolutionPop" + n).html(popInit);
+        $('#anneeSimuCsv' + n).html(nbrAnneeSimu);
+        $('#popInitCsv' + n).html(popInit);
+        $('#txNatCsv' + n).html(txNat);
+        $('#txMortCsv' + n).html(txMort);
 
+    }
+    console.log('popinit:' + popInit)
+    console.log('n' + n)
     var chrono = setInterval(function () {
-        $("#chrono").html(annee);
-        var population = parseInt($(".evolutionPop").html());
-        var calcul = Math.round(population + (population * txNat) - (population * txMort));
-        $(".evolutionPop").html(calcul);
-        console.log(calcul);
+            $("#chrono").html(annee);
 
-        // for (var n = 0; n < $("#nbrAnneeSimu").val(); n++) {
-        //     evolution(n);
-        // }
-        annee++;
+            for (var n = 1; n <= nbrVille; n++) {
+                console.log(n);
 
-        if (annee >= nbrAnneeSimu) {
-            clearInterval(chrono);
-            $('#partie3').hide();
-            $('#partie4').show();
-        }
-    }, 100);
+                var population = parseInt($("#evolutionPop" + n).html());
+                var calculPop = Math.round(population + (population * txNat) - (population * txMort));
+                $("#evolutionPop" + n).html(calculPop);
+                console.log('cal=' + calculPop, txNat, txMort, population);
+
+                test(n);
+
+            }
+
+            annee++;
+
+            if (annee >= nbrAnneeSimu) {
+                clearInterval(chrono);
+                $('#partie3').hide();
+                $('#partie4').show();
+
+            }
+        },
+        100);
+
 }
+
 
 $("#recommencer").click(function () {
     location.reload();
@@ -64,7 +82,7 @@ $("#recommencer").click(function () {
 
 // })
 
-function changeImg(min, max) {
+function changeImg() {
     var min = 1;
     var max = 36;
 
@@ -72,36 +90,53 @@ function changeImg(min, max) {
     var genereImgVille1 = Math.floor(Math.random() * img) + min;
     var genereImgVille2 = Math.floor(Math.random() * img) + min;
     var genereImgVille3 = Math.floor(Math.random() * img) + min;
-    $("#imgVille1").attr('src', 'img/' + "" + genereImgVille1 + "" + '.svg');
-    $("#imgVille2").attr('src', 'img/' + "" + genereImgVille2 + "" + '.svg');
-    $("#imgVille3").attr('src', 'img/' + "" + genereImgVille3 + "" + '.svg');
+    $("#imgVille1").append("<img src='img/" + genereImgVille1 + ".svg'>");
+    $("#imgVille2").append("<img src='img/" + genereImgVille2 + ".svg'>");
+    $("#imgVille3").append("<img src='img/" + genereImgVille3 + ".svg'>");
 }
 
-function test() {
-    var anSimu = $("#nbrAnneeSimu").val();
-    var nbCata = Math.floor(Math.random());
+function test(n) {
 
-    if (anSimu < 50) {
-        nbCata = (0 - 1);
-    } else if (anSimu >= 50 && anSimu < 500) {
-        nbCata = (1 - 10);
-    } else if (anSimu >= 500 && anSimu < 10000) {
-        nbCata = (2 - 31);
-    } else {
-        nbCata = (4 - 54);
-    }
-
+    var population = parseInt($("#evolutionPop" + n).html());
 
     if (population < 1000) {
-
+        changeImg();
+        console.log('trop nul');
     } else if (population <= 10000) {
+        console.log('plop');
         var nbBat = Math.round(population / 1000);
-        var resul = genereImg + nbBat
+        var i = 0;
+        while (i < nbBat) {
+            changeImg();
+            i++;
+            console.log(nbBat);
+        }
     } else {
+        console.log('boouuuu');
         var nbBat2 = Math.round(10 + ((population - 10000) / 10000));
-        var resul2 = genereImg + nbBat2
+        var n = 0;
+        while (n < nbBat2) {
+            changeImg();
+            n++;
+            console.log(nbBat2);
+        }
     }
+
 }
+
+// var anSimu = $("#nbrAnneeSimu").val();
+// var nbCata = Math.floor(Math.random());
+
+// if (anSimu < 50) {
+//     nbCata = (0 - 1);
+// } else if (anSimu >= 50 && anSimu < 500) {
+//     nbCata = (1 - 10);
+// } else if (anSimu >= 500 && anSimu < 10000) {
+//     nbCata = (2 - 31);
+// } else {
+//     nbCata = (4 - 54);
+// }
+
 
 
 // function evolPopulation() {

@@ -50,30 +50,30 @@ Classes\Autoloader::register();
                 <h3>Ville 1</h3>
                 <div class="form-group">
                     <label for="popInitial">Population initiale</label>
-                    <input type="number" name="quantity" class="form-control" id="popInitial" value="2"  min="2" max="5000">
+                    <input type="number" name="quantity" class="form-control" id="popInitial1" value="2"  min="2" max="5000">
                 </div>
                 <div class="form-group">
                     <label for="txNatalite">Taux de natalité </label>
-                    <input type="number" name="quantity" class="form-control" id="txNatalite" value="0.024" step="0.001" min="0" max="1">
+                    <input type="number" name="quantity" class="form-control" id="txNatalite1" value="0.024" step="0.001" min="0" max="1">
                 </div>
                 <div class="form-group">
                     <label for="txMortalite">Taux de mortalité</label>
-                    <input type="number" name="quantity" class="form-control" id="txMortalite" value="0.005" step="0.001" min="0" max="1">
+                    <input type="number" name="quantity" class="form-control" id="txMortalite1" value="0.005" step="0.001" min="0" max="1">
                 </div>
             </div>
             <div class="col-4" id="ville2">
                 <h3>Ville 2</h3>
                 <div class="form-group">
                     <label for="popInitial">Population initiale</label>
-                    <input type="number" name="quantity" class="form-control" id="popInitial" value="2" min="2" max="5000">
+                    <input type="number" name="quantity" class="form-control" id="popInitial2" value="2" min="2" max="5000">
                 </div>
                 <div class="form-group">
                     <label for="txNatalite">Taux de natalité </label>
-                    <input type="number" name="quantity" class="form-control" id="txNatalite" value="0.024" step="0.001" min="0" max="1">
+                    <input type="number" name="quantity" class="form-control" id="txNatalite2" value="0.024" step="0.001" min="0" max="1">
                 </div>
                 <div class="form-group">
                     <label for="txMortalite">Taux de mortalité</label>
-                    <input type="number" name="quantity" class="form-control" id="txMortalite" value="0.005"
+                    <input type="number" name="quantity" class="form-control" id="txMortalite2" value="0.005"
                     step="0.001" min="0" max="1">
                 </div>
             </div>
@@ -81,15 +81,15 @@ Classes\Autoloader::register();
                 <h3>Ville 3</h3>
                 <div class="form-group">
                     <label for="popInitial">Population initiale</label>
-                    <input type="number" name="quantity" class="form-control" id="popInitial" value="2" min="2" max="5000">
+                    <input type="number" name="quantity" class="form-control" id="popInitial3" value="2" min="2" max="5000">
                 </div>
                 <div class="form-group">
                     <label for="txNatalite">Taux de natalité </label>
-                    <input type="number" name="quantity" class="form-control" id="txNatalite" value="0.024" step="0.001" min="0" max="1">
+                    <input type="number" name="quantity" class="form-control" id="txNatalite3" value="0.024" step="0.001" min="0" max="1">
                 </div>
                 <div class="form-group">
                     <label for="txMortalite">Taux de mortalité</label>
-                    <input type="number" name="quantity" class="form-control" id="txMortalite" value="0.005"
+                    <input type="number" name="quantity" class="form-control" id="txMortalite3" value="0.005"
                     step="0.001" min="0" max="1">
                 </div>
             </div>
@@ -106,23 +106,23 @@ Classes\Autoloader::register();
         <h3 class="text-center">Année : <span id="chrono">0</span></h3>
         <br>
         <div class="row">
-            <div class="col" id="SimuVille1">
+            <div class="col-4" id="SimuVille1">
                 <h3>Ville 1</h3>
-                <h5>Population : <span class="evolutionPop"></span>
+                <h5>Population : <span id="evolutionPop1"></span>
                 </h5>
-                <img id="imgVille1" src="">
+                <div id="imgVille1"></div>
             </div>
-            <div class="col" id="SimuVille2">
+            <div class="col-4" id="SimuVille2">
             <h3>Ville 2</h3>
-                <h5>Population :<span class="evolutionPop"></span>
+                <h5>Population : <span id="evolutionPop2"></span>
                 </h5>
-                <img id="imgVille2" src="">
+                <div id="imgVille2"></div>
             </div>
-            <div class="col" id="SimuVille3">
+            <div class="col-4" id="SimuVille3">
             <h3>Ville 3</h3>
-                <h5>Population :<span class="evolutionPop"></span>
+                <h5>Population : <span id="evolutionPop3"></span>
                 </h5>
-                <img id="imgVille3" src="">
+                <div id="imgVille3"></div>
             </div>
         </div>
     </div>
@@ -142,27 +142,27 @@ Classes\Autoloader::register();
             <tbody>
                 <tr>
                     <th scope="row">Nombre d'années de simulation</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td id="anneeSimuCsv1"></td>
+                    <td id="anneeSimuCsv2"></td>
+                    <td id="anneeSimuCsv3"></td>   
                 </tr>
                 <tr>
                     <th scope="row">Population initiale</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td id="popInitCsv1"></td>
+                    <td id="popInitCsv2"></td>
+                    <td id="popInitCsv3"></td>
                 </tr>
                 <tr>
                     <th scope="row">Taux de natalité</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td id="txNatCsv1"></td>
+                    <td id="txNatCsv2"></td>
+                    <td id="txNatCsv3"></td>
                 </tr>
                 <tr>
                     <th scope="row">Taux de mortalité</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td id="txMortCsv1"></td>
+                    <td id="txMortCsv2"></td>
+                    <td id="txMortCsv3"></td>
                 </tr>
             </tbody>
         </table>
