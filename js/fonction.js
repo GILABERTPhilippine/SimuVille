@@ -11,10 +11,22 @@ $("#btnparametre").click(function () {
 
 })
 
-$("#btnSimulation").click(function () {
-    var nbrVille = $("#nbrVille").val();
 
-    chrono();
+$("#btnSimulation").click(function () {
+    var arrStat = [];
+    var nbrVille = $("#nbrVille").val();
+    var nbAnSimu = $("#nbrAnneeSimu").val();
+
+    for (var i = 1; i <= nbrVille; i++) {
+        var stat = {
+            'populationInitiale': $("#popInitial" + i).val(),
+            'tauxNatalite': $("#txNatalite" + i).val(),
+            'tauxMortalite': $("#txMortalite" + i).val()
+        }
+        arrStat.push(stat);
+    }
+
+    chrono(arrStat, nbrVille, nbAnSimu);
 
     $("#partie1, #partie2").hide();
 
@@ -25,9 +37,34 @@ $("#btnSimulation").click(function () {
 })
 
 
-function chrono() {
-    var nbrVille = $("#nbrVille").val();
-    // console.log(nbrVille);
+function chrono(arrStat, nbrVille, nbAnSimu) {
+
+    $.ajax({
+
+        type: 'POST',
+        url: 'creat_ville.php',
+
+        data: {
+            case: 'villes',
+            nbrVille: nbrVille,
+            tab: arrStat,
+            nbAnSimu: nbAnSimu
+        },
+
+        success: function (data) {
+            var recupData = JSON.parse(data);
+            console.log(recupData);
+
+            for (var i = 0; i < nbrVille; i++) {
+                $('#popInitCsv' + (i + 1)).html(recupData[i][0]);
+                $('#txNatCsv' + (i + 1)).html(recupData[i][1]);
+                $('#txMortCsv' + (i + 1)).html(recupData[i][2]);
+            }
+        },
+
+
+    });
+
 
     var nbrAnneeSimu = parseInt($("#nbrAnneeSimu").val());
     var annee = parseInt($("#chrono").html());
@@ -38,23 +75,20 @@ function chrono() {
         var txMort = parseFloat($("#txMortalite" + n).val());
         $("#evolutionPop" + n).html(popInit);
         $('#anneeSimuCsv' + n).html(nbrAnneeSimu);
-        $('#popInitCsv' + n).html(popInit);
-        $('#txNatCsv' + n).html(txNat);
-        $('#txMortCsv' + n).html(txMort);
 
     }
-    console.log('popinit:' + popInit)
-    console.log('n' + n)
+
     var chrono = setInterval(function () {
+
             $("#chrono").html(annee);
 
             for (var n = 1; n <= nbrVille; n++) {
-                console.log(n);
+                // console.log(n);
 
                 var population = parseInt($("#evolutionPop" + n).html());
                 var calculPop = Math.round(population + (population * txNat) - (population * txMort));
                 $("#evolutionPop" + n).html(calculPop);
-                console.log('cal=' + calculPop, txNat, txMort, population);
+                // console.log('cal=' + calculPop, txNat, txMort, population);
 
                 test(n);
 
@@ -101,89 +135,25 @@ function test(n) {
 
     if (population < 1000) {
         changeImg();
-        console.log('trop nul');
+        // console.log('trop nul');
     } else if (population <= 10000) {
-        console.log('plop');
+        // console.log('plop');
         var nbBat = Math.round(population / 1000);
         var i = 0;
         while (i < nbBat) {
             changeImg();
             i++;
-            console.log(nbBat);
+            // console.log(nbBat);
         }
     } else {
-        console.log('boouuuu');
+        // console.log('boouuuu');
         var nbBat2 = Math.round(10 + ((population - 10000) / 10000));
         var n = 0;
         while (n < nbBat2) {
             changeImg();
             n++;
-            console.log(nbBat2);
+            // console.log(nbBat2);
         }
     }
 
 }
-
-// var anSimu = $("#nbrAnneeSimu").val();
-// var nbCata = Math.floor(Math.random());
-
-// if (anSimu < 50) {
-//     nbCata = (0 - 1);
-// } else if (anSimu >= 50 && anSimu < 500) {
-//     nbCata = (1 - 10);
-// } else if (anSimu >= 500 && anSimu < 10000) {
-//     nbCata = (2 - 31);
-// } else {
-//     nbCata = (4 - 54);
-// }
-
-
-
-// function evolPopulation() {
-//     var anSimu = $("#nbrAnneeSimu").val();
-// var popInit = parseInt($("#popInitial").val());
-// var txNat = parseFloat($("#txNatalite").val());
-// var txMort = parseFloat($("#txMortalite").val());
-// var population = Math.round(popInit + (popInit * txNat) - (popInit * txMort));
-// $(".evolutionPop").html(population);
-// console.log(population);
-
-//     // CATASTROPHE
-//     var typeCata = {
-//         "Eau": 5,
-//         "Feu": 8,
-//         "Terre": 10,
-//         "Vent": 4,
-//         "Epidémie": 36,
-//         "Guerre": 47,
-//         "Pas de catastrophe": 0
-//     }
-//     console.log(typeCata);
-
-//     for (i = 0; i < nbCata; i++) {
-//         switch (typeCata) {
-//             case 'Eau':
-//                 population - (popInit * 5 / 100)
-//                 break;
-//             case 'Feu':
-//                 population - (popInit * 8 / 100)
-//                 break;
-//             case 'Terre':
-//                 population - (popInit * 10 / 100)
-//                 break;
-//             case 'Vent':
-//                 population - (popInit * 4 / 100)
-//                 break;
-//             case 'Epidémie':
-//                 population - (popInit * 36 / 100)
-//                 break;
-//             case 'Guerre':
-//                 population - (popInit * 47 / 100)
-//                 break;
-//             case 'Pas de catastrophe':
-//                 population
-//                 break;
-
-//         }
-//     }
-// }

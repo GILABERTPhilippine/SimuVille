@@ -2,7 +2,7 @@
 
 namespace Classes;
 
-use CLasses\Databases;
+use Classes\Database;
 
 /**
  * class Partie
@@ -32,9 +32,10 @@ class Partie
      */
     private $_nbAnSimu;
 
-    public function __construct()
+    public function __construct($annSimu)
     {
         $this->_datePartie = date('Y-m-d H:i:s');
+        $this->_nbAnSimu = $annSimu;
     }
 
     public function createPartie()
@@ -42,14 +43,14 @@ class Partie
         $pdo = new Database;
         $connect = $pdo->getPdo();
 
-        $insertPartie = $connect->preprare('INSERT INTO partie (date_partie, nb_an_sinu) VALUES (?, ?)');
+        $insertPartie = $connect->prepare('INSERT INTO partie (date_partie, nb_an_simu) VALUES (?, ?)');
         $insertPartie->bindParam(1, $this->_datePartie);
         $insertPartie->bindParam(2, $this->_nbAnSimu);
 
         $insertPartie->execute();
 
         $req = $connect->query('SELECT MAX (id_partie) FROM partie');
-        $result = $req - fetch();
+        $result = $req->fetch();
         $this->_idPartie = $result[0];
     }
 
