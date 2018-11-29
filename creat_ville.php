@@ -48,11 +48,11 @@ switch ($_POST['case']) {
 
         echo $data;
         break;
-    case 'stats':
-        $partie->setStats();
-        $stats = $partie->getStatGlobal();
-        echo $stats;
-        break;
+    // case 'stats':
+    //     $partie->setStats();
+    //     $stats = $partie->getStatGlobal();
+    //     echo $stats;
+    //     break;
     case 'csv':
         $partie->getCSV();
         break;

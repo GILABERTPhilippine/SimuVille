@@ -50,11 +50,11 @@ class Database
     public function __construct()
     {
 
-        $this->_host = 'postgresql-philippinegilabert.alwaysdata.net';
+        $this->_host = '';
         $this->_port = '5432';
-        $this->_dbName = 'philippinegilabert_simuvillebdd';
-        $this->_user = 'philippinegilabert';
-        $this->_pass = 'Lesking10';
+        $this->_dbName = '';
+        $this->_user = '';
+        $this->_pass = '';
     }
 
     /**
